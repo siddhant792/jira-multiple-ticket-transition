@@ -63,7 +63,7 @@ async function extractJiraKeysFromCommit() {
                 console.log("Payload--------------------------");
                 console.log(payload.action);
                 // case: Release
-                if(String(payload.action) == 'published') {
+                if(payload.action == 'published') {
                     const body = payload.release.body;
                     const prefix = "compare/";
                     let tags = body.substring(body.lastIndexOf(prefix) + prefix.length)
