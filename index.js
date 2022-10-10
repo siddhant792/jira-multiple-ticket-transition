@@ -68,7 +68,8 @@ async function extractJiraKeysFromCommit() {
                     const prefix = "compare/";
                     let tags = body.substring(body.lastIndexOf(prefix) + prefix.length)
                     let diffUrl = String(payload.repository.compare_url).replace("{base}...{head}", tags);
-                    octokit.request('GET /repos/:owner/:repo/releases/latest', {
+                    console.log(diffUrl);
+                    octokit.request(`GET ${diffUrl}`, {
                         owner: "octokit",
                         repo: "core.js"
                     }).then(response => {
