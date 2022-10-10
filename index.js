@@ -72,10 +72,8 @@ async function extractJiraKeysFromCommit() {
                                 const matches = matchAll(commit.commit.message, regex).toArray();
                                 matches.forEach((match) => {
                                     if (resultArr.find((element) => element == match)) {
-                                        // console.log(match + " is already included in result array");
                                     }
                                     else {
-                                        // console.log(" adding " + match + " to result array");
                                         resultArr.push(match);
                                     }
                                 });
@@ -91,7 +89,6 @@ async function extractJiraKeysFromCommit() {
                                     // console.log(match + " is already included in result array");
                                 }
                                 else {
-                                    // console.log(" adding " + match + " to result array");
                                     resultArr.push(match);
                                 }
                             });
@@ -101,8 +98,6 @@ async function extractJiraKeysFromCommit() {
                     }
                 }
                 else {
-                    // console.log("parse-all-commits input val is false");
-                    // console.log("head_commit: ", payload.head_commit);
                     const matches = matchAll(payload.head_commit.message, regex).toArray();
                     const result = matches.join(',');
                     core.setOutput("jira-keys", result);
@@ -116,6 +111,5 @@ async function extractJiraKeysFromCommit() {
 }
 (async function () {
     await extractJiraKeysFromCommit();
-    // console.log("finished extracting jira keys from commit message");
 })();
 exports.default = extractJiraKeysFromCommit;
