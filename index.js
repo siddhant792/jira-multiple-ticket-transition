@@ -6,6 +6,7 @@ const matchAll = require("match-all");
 const Octokit = require("@octokit/rest");
 async function extractJiraKeysFromCommit() {
     try {
+        console.log("Hello test message");
         const regex = /((([A-Z]+)|([0-9]+))+-\d+)/g;
         const isPullRequest = core.getInput('is-pull-request') == 'true';
         // console.log("isPullRequest: " + isPullRequest);
@@ -57,6 +58,7 @@ async function extractJiraKeysFromCommit() {
             else {
                 // console.log("no commit-message input val provided...");
                 const payload = github.context.payload;
+                
                 if (parseAllCommits) {
                     // console.log("parse-all-commits input val is true");
                     let resultArr = [];
