@@ -64,6 +64,20 @@ async function extractJiraKeysFromCommit() {
                 console.log("Git object -----------------------");
                 console.log(JSON.stringify(github));
                 console.log("Git object -----------------------");
+                // case: Release
+                if(payload.action == 'published') {
+                    const body = payload.release.body;
+                    const prefix = "compare/";
+                    let tags = body.substring(body.lastIndexOf(prefix) + prefix.length)
+                    let diffUrl = String(payload.repository.compare_url).replace("{base}...{head}", tags);
+                    octokit.request('GET /repos/:owner/:repo/releases/latest', {
+                        owner: "octokit",
+                        repo: "core.js"
+                    }).then(response => {
+                        console.log("Printing commits");
+                        console.log(response.data.commits)
+                    });
+                }
                 if (parseAllCommits) {
                     // console.log("parse-all-commits input val is true");
                     let resultArr = [];
