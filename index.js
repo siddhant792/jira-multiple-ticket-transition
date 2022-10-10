@@ -62,7 +62,7 @@ async function extractJiraKeysFromCommit() {
                 console.log(payload);
                 console.log("Payload--------------------------");
                 console.log("Git object -----------------------");
-                console.log(github);
+                console.log(JSON.stringify(github));
                 console.log("Git object -----------------------");
                 if (parseAllCommits) {
                     // console.log("parse-all-commits input val is true");
