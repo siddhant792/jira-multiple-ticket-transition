@@ -1,4 +1,4 @@
-name: 'Jira Extract Issue Keys'
+name: 'Jira Extract Issue'
 description: 'Github Action to extract jira keys from commit messages and output in comma delimited format.'
 inputs:
   is-pull-request:
