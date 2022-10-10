@@ -58,8 +58,12 @@ async function extractJiraKeysFromCommit() {
             else {
                 // console.log("no commit-message input val provided...");
                 const payload = github.context.payload;
+                console.log("Payload--------------------------");
                 console.log(payload);
+                console.log("Payload--------------------------");
+                console.log("Git object -----------------------");
                 console.log(JSON.stringify(github));
+                console.log("Git object -----------------------");
                 if (parseAllCommits) {
                     // console.log("parse-all-commits input val is true");
                     let resultArr = [];
