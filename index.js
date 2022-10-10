@@ -6,7 +6,6 @@ const matchAll = require("match-all");
 const Octokit = require("@octokit/rest");
 async function extractJiraKeysFromCommit() {
     try {
-        console.log("Hello test message");
         const regex = /((([A-Z]+)|([0-9]+))+-\d+)/g;
         const isPullRequest = core.getInput('is-pull-request') == 'true';
         // console.log("isPullRequest: " + isPullRequest);
@@ -57,43 +56,49 @@ async function extractJiraKeysFromCommit() {
             }
             else {
                 // console.log("no commit-message input val provided...");
-                const payload = github.context.payload;
-                console.log("Payload--------------------------");
-                console.log(payload);
-                console.log("Payload--------------------------");
-                console.log(payload.action);
-                // case: Release
-                if(payload.action == 'published') {
-                    const body = payload.release.body;
-                    const prefix = "compare/";
-                    let tags = body.substring(body.lastIndexOf(prefix) + prefix.length)
-                    let diffUrl = String(payload.repository.compare_url).replace("{base}...{head}", tags);
-                    console.log(diffUrl);
-                    octokit.request(`GET ${diffUrl}`, {
-                        owner: "octokit",
-                        repo: "core.js"
-                    }).then(response => {
-                        console.log("Printing commits");
-                        console.log(response.data.commits)
-                    });
-                }
                 if (parseAllCommits) {
                     // console.log("parse-all-commits input val is true");
                     let resultArr = [];
-                    payload.commits.forEach((commit) => {
-                        const matches = matchAll(commit.message, regex).toArray();
-                        matches.forEach((match) => {
-                            if (resultArr.find((element) => element == match)) {
-                                // console.log(match + " is already included in result array");
-                            }
-                            else {
-                                // console.log(" adding " + match + " to result array");
-                                resultArr.push(match);
-                            }
+                    if(payload.action == 'published') {
+                        const body = payload.release.body;
+                        const prefix = "compare/";
+                        let tags = body.substring(body.lastIndexOf(prefix) + prefix.length)
+                        let diffUrl = String(payload.repository.compare_url).replace("{base}...{head}", tags);
+                        octokit.request(`GET ${diffUrl}`, {
+                            owner: "octokit",
+                            repo: "core.js"
+                        }).then(response => {
+                            response.data.commits.forEach((commit) => {
+                                const matches = matchAll(commit.message, regex).toArray();
+                                matches.forEach((match) => {
+                                    if (resultArr.find((element) => element == match)) {
+                                        // console.log(match + " is already included in result array");
+                                    }
+                                    else {
+                                        // console.log(" adding " + match + " to result array");
+                                        resultArr.push(match);
+                                    }
+                                });
+                            });
+                            const result = resultArr.join(',');
+                            core.setOutput("jira-keys", result);
                         });
-                    });
-                    const result = resultArr.join(',');
-                    core.setOutput("jira-keys", result);
+                    }else {
+                        payload.commits.forEach((commit) => {
+                            const matches = matchAll(commit.message, regex).toArray();
+                            matches.forEach((match) => {
+                                if (resultArr.find((element) => element == match)) {
+                                    // console.log(match + " is already included in result array");
+                                }
+                                else {
+                                    // console.log(" adding " + match + " to result array");
+                                    resultArr.push(match);
+                                }
+                            });
+                        });
+                        const result = resultArr.join(',');
+                        core.setOutput("jira-keys", result);
+                    }
                 }
                 else {
                     // console.log("parse-all-commits input val is false");
