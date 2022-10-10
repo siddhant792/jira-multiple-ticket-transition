@@ -61,9 +61,7 @@ async function extractJiraKeysFromCommit() {
                 console.log("Payload--------------------------");
                 console.log(payload);
                 console.log("Payload--------------------------");
-                console.log("Git object -----------------------");
-                console.log(JSON.stringify(github));
-                console.log("Git object -----------------------");
+                console.log(payload.action);
                 // case: Release
                 if(payload.action == 'published') {
                     const body = payload.release.body;
