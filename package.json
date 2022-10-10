@@ -1,0 +1,37 @@
+{
+  "name": "jira-extract-issue-keys",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc --noEmit && jest",
+    "test_no_console_log": "tsc --noEmit && jest --silent"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HighwayThree/jira-extract-issue-keys.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HighwayThree/jira-extract-issue-keys/issues"
+  },
+  "homepage": "https://github.com/HighwayThree/jira-extract-issue-keys#readme",
+  "dependencies": {
+    "@octokit/rest": "^16.40.0",
+    "match-all": "^1.2.5"
+  },
+  "devDependencies": {
+    "@actions/core": "^1.2.2",
+    "@actions/github": "^2.1.0",
+    "@types/jest": "^25.1.2",
+    "@types/node": "^13.7.0",
+    "jest": "^25.1.0",
+    "js-yaml": "^3.13.1",
+    "nock": "^11.8.2",
+    "ts-jest": "^25.2.0",
+    "typescript": "^3.7.5"
+  }
+}
