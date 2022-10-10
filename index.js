@@ -69,7 +69,7 @@ async function extractJiraKeysFromCommit() {
                             repo: "core.js"
                         }).then(response => {
                             response.data.commits.forEach((commit) => {
-                                const matches = matchAll(commit.message, regex).toArray();
+                                const matches = matchAll(commit.commit.message, regex).toArray();
                                 matches.forEach((match) => {
                                     if (resultArr.find((element) => element == match)) {
                                         // console.log(match + " is already included in result array");
