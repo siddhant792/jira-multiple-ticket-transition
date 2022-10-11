@@ -15,6 +15,8 @@ class App {
 
   async run() {
     const issueList = await this.github.extractJiraKeys();
+    console.log('Issues --------------');
+    console.log(issueList);
     if (issueList.length === 0) {
       console.log(`No issues found`);
       return;
