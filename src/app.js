@@ -15,8 +15,6 @@ class App {
 
   async run() {
     const issueList = await this.github.extractJiraKeys();
-    console.log('Issues --------------');
-    console.log(issueList);
     if (issueList.length === 0) {
       console.log(`No issues found`);
       return;
@@ -24,7 +22,8 @@ class App {
 
     console.log(`Found issue keys: ${issueList.join(", ")}`);
     const transitionIds = await this.getTransitionIds(issueList);
-    await this.transitionIssues(issueList, transitionIds);
+    console.log("Transition ids ---------> " + transitionIds);
+    // await this.transitionIssues(issueList, transitionIds);
   }
 
   async getTransitionIds(issues) {
@@ -32,12 +31,12 @@ class App {
       issues.map(async (issue) => {
         const { transitions } = await this.jira.getIssueTransitions(issue.key);
         console.log("Transitions: ", transitions);
-        const targetTransition = transitions.find(({ name }) => name === this.targetStatus);
-        if (!targetTransition) {
-          console.log(`Cannot find transition to status "${this.targetStatus}"`);
-          return null;
-        }
-        return targetTransition.id;
+        // const targetTransition = transitions.find(({ name }) => name === this.targetStatus);
+        // if (!targetTransition) {
+        //   console.log(`Cannot find transition to status "${this.targetStatus}"`);
+        //   return null;
+        // }
+        // return targetTransition.id;
       })
     );
 

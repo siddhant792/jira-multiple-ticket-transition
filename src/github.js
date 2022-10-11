@@ -74,7 +74,6 @@ class Github {
                 jiraIssuesArr = matches;
             }
         }
-        console.log("JIRA OUTPIT - > " + jiraIssuesArr);
     }
     catch (error) {
         core.setFailed(error.message);
