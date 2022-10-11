@@ -68,8 +68,8 @@ class Github {
                           }
                       });
                   });
-                  jiraIssuesArr = resultArr;
               });
+              jiraIssuesArr = resultArr
             }
             else {
                 const matches = matchAll(payload.head_commit.message, regex).toArray();
