@@ -33,7 +33,6 @@ class Jira {
 
   async getIssueTransitions(issueId) {
     const path = `issue/${issueId}/transitions`;
-    console.log("Get Issue Transit -> " + path);
     const { data } = await this.api.get(path);
     return data;
   }
