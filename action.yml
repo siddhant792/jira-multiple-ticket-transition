@@ -11,8 +11,8 @@ inputs:
     description: To which status the issues found in commits should transition to
     required: true
   is-pull-request:
-    description: 'if true, other input parameters will be ignored and keys from commits associated with pull request will be retrieved and parsed for Jira keys'
-    required: false
+    description: if true, other input parameters will be ignored and keys from commits associated with pull request will be retrieved and parsed for Jira keys
+    required: true
     default: false
   jira-base-url:
     description: URL of Jira instance
