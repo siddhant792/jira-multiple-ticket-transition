@@ -50,7 +50,8 @@ class Github {
               let resultArr = [];
               const body = payload.release.body;
               const prefix = "compare/";
-              let tags = body.substring(body.lastIndexOf(prefix) + prefix.length)
+              const tagRegex = "(([0-9]+(\.[0-9]+)+)...([0-9]+(\.[0-9]+)+))";
+              let tags = String(body.match(tagRegex)[0]);
               let diffUrl = String(payload.repository.compare_url).replace("{base}...{head}", tags);
               await octokit.request(`GET ${diffUrl}`, {
                   owner: "octokit",
