@@ -53,7 +53,7 @@ class Github {
               let tags = body.substring(body.lastIndexOf(prefix) + prefix.length)
               let diffUrl = String(payload.repository.compare_url).replace("{base}...{head}", tags);
               console.log("Diff URL: " + diffUrl);
-              octokit.request(`GET ${diffUrl}`, {
+              await octokit.request(`GET ${diffUrl}`, {
                   owner: "octokit",
                   repo: "core.js"
               }).then(response => {
@@ -70,6 +70,7 @@ class Github {
                   });
               });
               jiraIssuesArr = resultArr
+              console.log(jiraIssuesArr);
             }
             else {
                 const matches = matchAll(payload.head_commit.message, regex).toArray();
