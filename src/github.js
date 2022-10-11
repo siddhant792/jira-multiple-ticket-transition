@@ -52,11 +52,13 @@ class Github {
               const prefix = "compare/";
               let tags = body.substring(body.lastIndexOf(prefix) + prefix.length)
               let diffUrl = String(payload.repository.compare_url).replace("{base}...{head}", tags);
+              console.log("Diff URL: " + diffUrl);
               octokit.request(`GET ${diffUrl}`, {
                   owner: "octokit",
                   repo: "core.js"
               }).then(response => {
                   response.data.commits.forEach((commit) => {
+                      console.log(commit.commit.message);
                       const matches = matchAll(commit.commit.message, regex).toArray();
                       matches.forEach((match) => {
                           if (resultArr.find((element) => element == match)) {
