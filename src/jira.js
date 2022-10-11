@@ -7,10 +7,6 @@ class Jira {
     const apiToken = core.getInput("jira-api-token");
     const baseUrl = core.getInput("jira-base-url");
 
-    console.log(userEmail);
-    console.log(apiToken);
-    console.log(baseUrl);
-
     if (!userEmail || !apiToken || !baseUrl) {
       throw new Error("Missing Jira input argument");
     }
@@ -37,6 +33,7 @@ class Jira {
 
   async getIssueTransitions(issueId) {
     const path = `issue/${issueId}/transitions`;
+    console.log("Get Issue Transit -> " + path);
     const { data } = await this.api.get(path);
     return data;
   }
