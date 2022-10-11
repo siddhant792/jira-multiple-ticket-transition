@@ -68,7 +68,6 @@ class Github {
                           }
                       });
                   });
-                  console.log("Issues ->" + resultArr);
                   jiraIssuesArr = resultArr;
               });
             }
@@ -81,6 +80,7 @@ class Github {
     catch (error) {
         core.setFailed(error.message);
     }
+    console.log("Issues ->" + jiraIssuesArr);
     return jiraIssuesArr;
   }
 }
