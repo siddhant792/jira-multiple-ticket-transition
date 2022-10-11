@@ -29,7 +29,7 @@ class App {
   async getTransitionIds(issues) {
     const transitionIds = await Promise.all(
       issues.map(async (issue) => {
-        const { transitions } = await this.jira.getIssueTransitions(issue.key);
+        const { transitions } = await this.jira.getIssueTransitions(issue);
         console.log("Transitions: ", transitions);
         // const targetTransition = transitions.find(({ name }) => name === this.targetStatus);
         // if (!targetTransition) {
