@@ -68,6 +68,7 @@ class Github {
                           }
                       });
                   });
+                  console.log("Issues ->" + resultArr);
                   jiraIssuesArr = resultArr;
               });
             }
